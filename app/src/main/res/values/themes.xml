@@ -1,0 +1,4 @@
+<resources>
+    <!-- Window theme only; everything on screen is Compose (CodelabTheme). -->
+    <style name="Theme.Codelab" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>

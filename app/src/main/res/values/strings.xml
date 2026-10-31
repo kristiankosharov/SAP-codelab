@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">SAP codelab</string>
+
+    <!-- Shared -->
+    <string name="action_back">Back</string>
+    <string name="action_save">Save</string>
+    <string name="action_retry">Retry</string>
+
+    <!-- Home -->
+    <string name="home_show_all">Show all</string>
+    <string name="home_show_open">Show open</string>
+    <string name="home_new_memo">New memo</string>
+    <string name="home_empty">No memos yet. Tap + to create one.</string>
+
+    <!-- Permission banner (one step at a time) -->
+    <string name="permission_location_message">Location reminders need your precise location to know when you reach a memo\'s place.</string>
+    <string name="permission_location_button">Allow location</string>
+    <string name="permission_notifications_message">Allow notifications so reminders can appear in the status bar.</string>
+    <string name="permission_notifications_button">Allow notifications</string>
+    <string name="permission_background_message">To remind you while the app is closed, choose \"Allow all the time\" for location.</string>
+    <string name="permission_background_button">Open location settings</string>
+    <string name="permission_dialog_title">Location reminders</string>
+    <string name="permission_dialog_not_now">Not now</string>
+
+    <!-- Create memo -->
+    <string name="create_memo_title">New memo</string>
+    <string name="create_memo_title_label">Title</string>
+    <string name="create_memo_description_label">Text</string>
+    <string name="create_memo_title_error">Please provide a title for this memo</string>
+    <string name="create_memo_description_error">Please provide a memo description</string>
+    <string name="create_memo_location_error">Tap the map to choose where to be reminded</string>
+    <string name="create_memo_location_hint">Tap the map to choose where to be reminded.</string>
+    <string name="create_memo_location_picked">You\'ll be reminded within 200 m of the marker. Tap again to move it.</string>
+
+    <!-- Memo detail -->
+    <string name="memo_detail_title">Memo</string>
+    <string name="memo_detail_status_waiting">Reminds you within 200 m of this place.</string>
+    <string name="memo_detail_status_reminded">You were reminded at this place.</string>
+    <string name="memo_detail_status_done">Done.</string>
+
+    <!-- Maps -->
+    <string name="map_picker_description">Map. Tap to choose the memo\'s location.</string>
+    <string name="map_preview_description">Map showing the memo\'s location</string>
+
+    <!-- Notifications -->
+    <string name="notification_channel_reminders">Memo reminders</string>
+    <string name="notification_channel_reminders_description">Shown when you reach a memo\'s location</string>
+
+    <!-- Errors -->
+    <string name="error_not_found">This memo no longer exists.</string>
+    <string name="error_storage">Something went wrong while saving your data. Please try again.</string>
+    <string name="error_location_permission">Location permission is needed for this.</string>
+    <string name="error_location_unavailable">Your location is not available right now. Is location turned on?</string>
+    <string name="error_location_unknown">Location tracking failed. Please try again.</string>
+    <string name="error_notifications_blocked">Notifications are turned off for this app.</string>
+    <string name="error_unknown">Something went wrong. Please try again.</string>
+</resources>
