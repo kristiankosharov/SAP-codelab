@@ -8,11 +8,13 @@ import com.sap.codelab.data.location.LocationTrackingRepository
 import com.sap.codelab.data.memo.MemoRepository
 import com.sap.codelab.data.permission.PermissionManager
 import com.sap.codelab.data.permission.PermissionsData
-import com.sap.codelab.domain.di.LocationUseCaseModule
-import com.sap.codelab.domain.di.MemoUseCaseModule
 import com.sap.codelab.domain.model.GeoPoint
 import com.sap.codelab.domain.model.PermissionStatus
+import com.sap.codelab.domain.usecase.GetCurrentLocationUseCaseImpl
+import com.sap.codelab.domain.usecase.GetMemoUseCaseImpl
+import com.sap.codelab.domain.usecase.GetPermissionStatusUseCaseImpl
 import com.sap.codelab.domain.usecase.MarkMemoDoneUseCaseImpl
+import com.sap.codelab.domain.usecase.ObserveMemosUseCaseImpl
 import com.sap.codelab.domain.usecase.SaveMemoUseCaseImpl
 import com.sap.codelab.domain.usecase.SyncGeofencesUseCase
 import com.sap.codelab.testing.HERE
@@ -72,19 +74,19 @@ class MemoUseCasesTest {
     }
 
     @Test
-    fun `memo one-liners map data to domain models`() = runTest {
+    fun `memo use cases map data to domain models`() = runTest {
         every { memoRepository.observeMemos(true) } returns flowOf(AppResult.Success(listOf(memoData(1))))
         coEvery { memoRepository.getMemo(1) } returns AppResult.Success(memoData(1))
 
-        MemoUseCaseModule.provideObserveMemosUseCase(memoRepository)(true).test {
+        ObserveMemosUseCaseImpl(memoRepository)(true).test {
             assertEquals(AppResult.Success(listOf(memo(1))), awaitItem())
             awaitComplete()
         }
-        assertEquals(AppResult.Success(memo(1)), MemoUseCaseModule.provideGetMemoUseCase(memoRepository)(1))
+        assertEquals(AppResult.Success(memo(1)), GetMemoUseCaseImpl(memoRepository)(1))
     }
 
     @Test
-    fun `location one-liners map data to domain models`() = runTest {
+    fun `location use cases map data to domain models`() = runTest {
         coEvery { locationRepository.getCurrentLocation() } returns AppResult.Success(GeoPointData(1.0, 2.0))
         val permissionManager = mockk<PermissionManager>()
         every { permissionManager.currentPermissions() } returns PermissionsData(
@@ -94,8 +96,8 @@ class MemoUseCasesTest {
             notifications = true,
         )
 
-        assertEquals(AppResult.Success(GeoPoint(1.0, 2.0)), LocationUseCaseModule.provideGetCurrentLocationUseCase(locationRepository)())
-        val status = LocationUseCaseModule.provideGetPermissionStatusUseCase(permissionManager)()
+        assertEquals(AppResult.Success(GeoPoint(1.0, 2.0)), GetCurrentLocationUseCaseImpl(locationRepository)())
+        val status = GetPermissionStatusUseCaseImpl(permissionManager)()
         assertEquals(PermissionStatus(hasPreciseLocation = false, hasAnyLocation = true, hasBackgroundLocation = false, hasNotifications = true), status)
         assertFalse(status.canRemindInBackground)
         assertTrue(status.copy(hasPreciseLocation = true, hasBackgroundLocation = true).canRemindInBackground)
